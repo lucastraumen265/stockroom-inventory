@@ -56,4 +56,8 @@ Tables: `users`, `categories`, `items`, `movements`.
 Stock changes run inside a transaction and every change is recorded in `movements` with the before and after quantity.
 
 ## Authors
-Jasper Kim Santos and team, BULSU COE 2
+Lorenzo, Jedrick 
+Manahan, Manuel 
+Manalastas, Jef Edrielle
+Santos, Jasper Kim
+
