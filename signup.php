@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $st = $pdo->prepare('SELECT 1 FROM users WHERE email = ?'); $st->execute([$email]);
         if ($st->fetch()) $errors['email'] = 'This email is already registered.';
         else {
-            $pdo->prepare('INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,"staff")')->execute([$name, $email, password_hash($pass, PASSWORD_BCRYPT)]);
+            $pdo->prepare('INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,?)')
+                ->execute([$name, $email, password_hash($pass, PASSWORD_BCRYPT), 'staff']);
             session_regenerate_id(true);
             $_SESSION['uid'] = $pdo->lastInsertId();
             flash_set('success', 'Account created', 'Welcome to Stockroom!');
@@ -48,7 +49,7 @@ $ec = fn($k) => isset($errors[$k]) ? ' error' : '';
                 <ul class="pw-rules" id="pwRules"><li>At least 8 characters</li><li>Contains a letter</li><li>Contains a number</li></ul></div>
             <div class="form-group"><label for="confirm">Confirm password</label><div class="pw-wrap"><input type="password" name="confirm" id="confirm" class="form-control<?= $ec('confirm') ?>" placeholder="Re-enter your password" required>
                 <button type="button" class="eye" data-eye aria-label="Show or hide password"><?= icon('eye', 20) ?></button></div><?= $fe('confirm') ?></div>
-            <button type="submit" class="btn primary block" id="authBtn" disabled>Create account</button>
+            <button type="submit" class="btn primary block" id="authBtn">Create account</button>
             <p class="hint">Complete every field and meet all password rules to continue.</p>
         </form>
         <p class="auth-foot">Already have an account? <a href="index.php">Log in</a></p>
