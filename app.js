@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (login) {
         const em = $('#email'), pw = $('#password'), btn = $('#authBtn');
         const chk = () => { btn.disabled = !(em.value.trim() && pw.value.trim()); };
-        em.addEventListener('input', chk); pw.addEventListener('input', chk); chk();
+        ['input', 'change', 'keyup', 'blur'].forEach(ev => login.addEventListener(ev, chk));
+        setInterval(chk, 400); chk();
     }
 
     // 5. Signup rules (no recursion)
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             r.forEach((ok, i) => { rules[i].classList.toggle('ok', ok); });
             btn.disabled = !(r.every(Boolean) && $('#name').value.trim() && $('#email').value.trim() && v === cf.value);
         };
-        $$('input', su).forEach(i => i.addEventListener('input', check)); check();
+        ['input', 'change', 'keyup', 'blur'].forEach(ev => su.addEventListener(ev, check));
+setInterval(check, 400); check();
     }
 
     // 6. Stock forms: live current qty, validation, preview, review step
