@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <?php if ($error): ?><div class="alert" role="alert"><?= e($error) ?></div><?php endif; ?>
             </div>
-            <button type="submit" class="btn primary block" id="authBtn" disabled>Log in</button>
+            <button type="submit" class="btn primary block" id="authBtn">Log in</button>
             <p class="hint">Enter your email and password to log in.</p>
         </form>
         <p class="auth-foot">Don't have an account? <a href="signup.php">Sign up</a></p>
